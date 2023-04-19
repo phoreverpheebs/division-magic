@@ -1,2 +1,11 @@
+# Directories
 test/
 wtf/
+
+# Binaries without source files
+rem*
+!rem.*
+
+# don't want object files though
+*.hi
+*.o

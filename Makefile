@@ -7,7 +7,9 @@ BASENAME = rem
 CTARGET = remc
 HSTARGET = remhs
 
-.PHONY: all clean
+TARGETS = $(CTARGET) $(HSTARGET)
+
+.PHONY: all clean clean-all
 all: c hs
 c: $(CTARGET)
 hs: $(HSTARGET)
@@ -19,4 +21,7 @@ $(HSTARGET): $(BASENAME).hs
 	$(HSC) $^ $(HSCFLAGS) -o $@
 
 clean:
-	@$(RM) -vf *.o *.hi $(CTARGET) $(HSTARGET)
+	@$(RM) -vf *.o *.hi
+
+clean-all:
+	@$(RM) -vf *.o *.hi $(TARGETS)
