@@ -14,7 +14,7 @@ getNc :: Word -> Word
 getNc d = (negate 1 :: Word) - ((negate d :: Word) `mod` d :: Word)
     
 guardClause :: Word -> Word -> Word -> Word -> Bool
-guardClause p q1 r1 delta = (p >= (w * 2) || (q1 >= delta || (q1 == delta && r1 == 0)))
+guardClause p q1 r1 delta = (p < (w * 2) && (q1 < delta || (q1 == delta && r1 == 0)))
 
 innerUMagic :: Word -> Word -> Word -> Word -> Word -> Word -> Word -> (Word, Word)
 innerUMagic p d nc q1 r1 q2 r2 = do
@@ -26,8 +26,8 @@ innerUMagic p d nc q1 r1 q2 r2 = do
                      else (shiftL q2 1, (shiftL r2 1) .|. 1)
         pn = p + 1
     if guardClause pn q1t r1t (d - 1 - r2t)
-       then (q2t + 1, pn - w - 32) -- why - 32 ? idk man
-       else innerUMagic pn d nc q1t r1t q2t r2t
+       then innerUMagic pn d nc q1t r1t q2t r2t
+       else (q2t + 1, pn - w - 32) -- why - 32 ? idk man
 
 
 getUMagic :: Word -> (Word, Word) -- Magic and Shift --
