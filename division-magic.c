@@ -28,9 +28,10 @@ int main(int argc, char **argv) {
     if (divisor == 0) divisor++;
 
     struct magic_t ms = get_magic(divisor, 0);
-    printf("%lx: Magic: %lx "
-            "| Preshift: %d "
-            "| Postshift: %d\n", divisor, ms.M, ms.preshift, ms.postshift);
+    printf("%lx: Magic: %lx ", divisor, ms.M);
+    if (ms.preshift)
+        printf("| Preshift: %d ", ms.preshift);
+    printf("| Postshift: %d\n", ms.postshift);
     
     return 1;
 }
