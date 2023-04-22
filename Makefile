@@ -3,9 +3,9 @@ HSC = ghc
 HSCFLAGS = -Wall
 CC = gcc
 CCFLAGS = -Wall
-BASENAME = rem
-CTARGET = remc
-HSTARGET = remhs
+BASENAME = division-magic
+CTARGET = divmagicc
+HSTARGET = divmagichs
 
 TARGETS = $(CTARGET) $(HSTARGET)
 
