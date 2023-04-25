@@ -1,0 +1,42 @@
+#!/usr/bin/bc -q
+
+/* This file is meant to help check if a divisor can be
+inversed through the magic function. 
+
+In it's current state it seems to flag some integers as
+two-way when they are actually not. This seems to be caused
+by the `mag(d, p)` function, which miscalculates the magic
+for some integers.
+*/
+
+define mag(d, p) {
+    return (2^p + d - (2^p % d)) / d;
+}
+
+define inv(d, p, q) {
+    return (2^q / mag(d, p)) - d == -1;
+}
+
+define getp(d) {
+    auto nc, p;
+
+    nc = (2^63 / d) * d -1
+
+    p = 64;
+    while (2^p <= nc * (d - (2^p % d))) {
+        p += 1;
+    }
+
+    return p;
+}
+
+print "divisor: "; d = read()
+p = getp(d)
+mag(d, p)
+q = getp(mag(d, p))
+
+print "p = "; p
+print "q = "; q
+print "is two-way: "; inv(d, p, q)
+
+halt
